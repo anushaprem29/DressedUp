@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.closet.anusha.dressedup.GalleryActivity">
+    <LinearLayout
+        android:id="@+id/lt_buttons"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/bt_clo"
+            style="bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/view_bg"
+            android:text="CLOTHES" />
+
+        <Button
+            android:id="@+id/bt_acc"
+            style="bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/view_bg"
+            android:text="ACCESSORIES" />
+        <Button
+            android:id="@+id/bt_shoesbag"
+            style="bold"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:background="@drawable/view_bg"
+            android:text="SHOES" />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:id="@+id/gallery_lt"
+        android:paddingLeft="2dp"
+        android:paddingTop="2dp"
+        android:paddingRight="2dp"
+        android:paddingBottom="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#191919">
+        <ImageView
+            android:id="@+id/bt_home2"
+            style="bold"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@drawable/home_icon" />
+        <ImageView
+            android:id="@+id/bt_gallery2"
+            style="bold"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:background="@color/colorPrimaryDark"
+            android:src="@drawable/gallery_icon"
+            android:layout_width="0dp" />
+        <ImageView
+            android:id="@+id/bt_camera2"
+            style="bold"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@drawable/cam_icon" />
+        <ImageView
+            android:id="@+id/bt_recents2"
+            style="bold"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@drawable/fav_icon" />
+    </LinearLayout>
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/gal_listview"
+        android:layout_below="@+id/lt_buttons"
+        android:layout_above="@id/gallery_lt">
+    </ListView>
+</RelativeLayout>

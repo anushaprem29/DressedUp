@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.closet.anusha.dressedup.AddData">
+
+    <LinearLayout
+        android:layout_alignParentBottom="true"
+        android:id="@+id/add_lt"
+        android:paddingLeft="2dp"
+        android:paddingTop="2dp"
+        android:paddingRight="2dp"
+        android:paddingBottom="2dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#191919">
+        <ImageView
+            android:id="@+id/bt_home3"
+            style="bold"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@drawable/home_icon" />
+        <ImageView
+            android:id="@+id/bt_gallery3"
+            style="bold"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@drawable/gallery_icon"
+            android:layout_width="0dp" />
+        <ImageView
+            android:id="@+id/bt_camera3"
+            style="bold"
+            android:background="@color/colorPrimaryDark"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@drawable/cam_icon" />
+        <ImageView
+            android:id="@+id/bt_recents3"
+            style="bold"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:src="@drawable/fav_icon" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/add_lt">
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/buttonbg"
+                android:id="@+id/pic_llt">
+
+                <ImageView
+                    android:layout_width="215dp"
+                    android:layout_height="300dp"
+                    android:id="@+id/add_image3"
+                    android:background="@drawable/view_bg"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true" />
+                <TextView
+                    android:id="@+id/myImageViewText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="Tap to add image!"
+                    android:textColor="#000000"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true" />
+                <ImageView
+                    android:id="@+id/pencil_image"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@drawable/pencil_icon"
+                    android:visibility="visible"
+                    android:background="@drawable/view_bg"
+                    android:layout_alignTop="@+id/add_image3"
+                    android:layout_alignRight="@+id/add_image3"
+                    />
+            </RelativeLayout>
+            <RadioGroup
+                android:id="@+id/chooser"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="4dp"
+                android:layout_marginBottom="4dp"
+                android:layout_below="@id/pic_llt"
+                android:background="@drawable/view_bg"
+                >
+                <RadioButton
+                    android:id="@+id/clothes_chooser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Clothes"/>
+                <RadioButton
+                    android:id="@+id/accessories_chooser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Accessories" />
+                <RadioButton
+                    android:id="@+id/shoes_bags_chooser"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Shoes or Bags" />
+            </RadioGroup>
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/chooser"
+                android:id="@+id/rest_rlt"
+                android:visibility="gone">
+                <TextView
+                    android:text="Select Colours"
+                    android:id="@+id/textView1"
+                    android:textColor="#ffffff"
+                    android:layout_marginTop="4dp"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="5dip" />
+                <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:text="- None Selected -"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/view_bg"
+                    android:layout_below="@+id/textView1"
+                    android:id="@+id/select_colours"
+                    android:padding="5dip" />
+                <TextView
+                    android:text="Select Types"
+                    android:textColor="#ffffff"
+                    android:id="@+id/textView2"
+                    android:layout_width="fill_parent"
+                    android:layout_below="@+id/select_colours"
+                    android:layout_height="wrap_content"
+                    android:padding="5dip" />
+
+                <Button
+                    android:layout_height="wrap_content"
+                    android:layout_width="fill_parent"
+                    android:layout_marginTop="4dp"
+                    android:text="- None Selected -"
+                    android:background="@drawable/view_bg"
+                    android:layout_below="@+id/textView2"
+                    android:id="@+id/select_types1"
+                    android:padding="5dip" />
+
+                <RelativeLayout
+                    android:layout_marginTop="4dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/select_types1"
+                    android:id="@+id/radio_rlt">
+                    <RadioGroup
+                        android:id="@+id/cloth_topbot"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:background="@drawable/view_bg"
+                        >
+                        <RadioButton
+                            android:id="@+id/c1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Top"/>
+                        <RadioButton
+                            android:id="@+id/c2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Bottom" />
+                        <RadioButton
+                            android:id="@+id/c3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Other" />
+                    </RadioGroup>
+                    <RadioGroup
+                        android:id="@+id/acc_topbot"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:background="@drawable/view_bg"
+                        >
+                        <RadioButton
+                            android:id="@+id/a1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Earrings"/>
+                        <RadioButton
+                            android:id="@+id/a2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Necklace" />
+                        <RadioButton
+                            android:id="@+id/a3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Bracelets" />
+                        <RadioButton
+                            android:id="@+id/a4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Watches"/>
+                        <RadioButton
+                            android:id="@+id/a5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Hair Accessories" />
+                        <RadioButton
+                            android:id="@+id/a6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Tie" />
+                        <RadioButton
+                            android:id="@+id/a7"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Belts"/>
+                        <RadioButton
+                            android:id="@+id/a9"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Scarves" />
+                        <RadioButton
+                            android:id="@+id/a10"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Other" />
+                    </RadioGroup>
+                    <RadioGroup
+                        android:id="@+id/shoes_topbot"
+                        android:layout_width="fill_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:visibility="gone"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginBottom="4dp"
+                        android:background="@drawable/view_bg"
+                        >
+                        <RadioButton
+                            android:id="@+id/s1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Shoes"/>
+                        <RadioButton
+                            android:id="@+id/s2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Bag" />
+                    </RadioGroup>
+                </RelativeLayout>
+                <RatingBar
+                    android:id="@+id/ratingBar_c"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:numStars="5"
+                    android:stepSize="0.5"
+                    android:rating="2.0"
+                    android:progressDrawable="@drawable/rating_bar_gold"
+                    android:layout_below="@+id/radio_rlt"
+                    android:layout_centerHorizontal="true" />
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:id="@+id/comments_c"
+                    android:layout_below="@+id/ratingBar_c"
+                    android:hint="COMMENTS (UPTO 50 CHARACTERS)"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"
+                    android:background="@drawable/view_bg"
+                    android:textColorHint="@color/colorPrimary"
+                    android:maxLength="50"/>
+                <RadioGroup
+                    android:id="@+id/BorrowedItemCheck"
+                    android:layout_width="fill_parent"
+                    android:layout_below="@+id/comments_c"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginBottom="4dp"
+                    android:background="@drawable/view_bg"
+                    >
+                    <RadioButton
+                        android:id="@+id/b1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Borrowed Item"/>
+                    <RadioButton
+                        android:id="@+id/b2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Lent Item" />
+                    <RadioButton
+                        android:id="@+id/b3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="None" />
+                </RadioGroup>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/borrowerLlt"
+                    android:orientation="vertical"
+                    android:layout_below="@+id/BorrowedItemCheck"
+                    android:visibility="gone">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:id="@+id/borrower"
+                    android:hint="Borrowed From?"
+                    android:textAlignment="center"
+                    android:textColor="@color/colorPrimary"
+                    android:background="@drawable/view_bg"
+                    android:textColorHint="@color/colorPrimary"
+                    android:maxLength="20"/>
+                <DatePicker
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/dateReturned">
+                </DatePicker>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_below="@+id/borrowerLlt">
+                    <Button
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
+                        android:layout_height="wrap_content"
+                        android:text="ADD DATA"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/view_bg"
+                        android:id="@+id/add_data_c" />
+
+                    <Button
+                        android:layout_weight="1"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="DISMISS"
+                        android:background="@drawable/view_bg"
+                        android:layout_marginTop="4dp"
+                        android:id="@+id/dismiss" />
+                </LinearLayout>
+            </RelativeLayout>
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
