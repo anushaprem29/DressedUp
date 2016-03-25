@@ -1,5 +1,6 @@
 package com.closet.anusha.dressedup;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -13,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -73,6 +75,9 @@ public class GalleryAdapterA extends BaseAdapter {
         TextView mTextViewlastWorn = (TextView) view.findViewById(R.id.tv_lastWorn);
         TextView mTextViewcomment = (TextView) view.findViewById(R.id.tv_comment);
         ImageView del = (ImageView) view.findViewById(R.id.img_del);
+        ImageView edit = (ImageView) view.findViewById(R.id.img_edit);
+        ImageView borrow = (ImageView) view.findViewById(R.id.img_borrow);
+        ImageView lend = (ImageView) view.findViewById(R.id.img_lend);
         mTextViewnoOfTimes.setText("No of times: "+contact.get_noOfTimes());
         idColor=contact.get_color();
         mDotsText = new TextView[13];
@@ -107,6 +112,50 @@ public class GalleryAdapterA extends BaseAdapter {
                 diaBox.show();
             }
         });
+        borrow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(contact.get_available()==1){
+                    android.app.AlertDialog.Builder diaBox = askBorrowOption();
+                    diaBox.show();
+                }
+                else
+                    Toast.makeText(mContext,"Can not borrow this item",Toast.LENGTH_SHORT).show();
+            }
+        });
+        lend.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(contact.get_available()==1){
+                    android.app.AlertDialog.Builder diaBox = askLendOption();
+                    diaBox.show();
+                }
+                else
+                    Toast.makeText(mContext,"Can not lend this item",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AccessoriesDatabase accDbHelper = new AccessoriesDatabase(mContext);
+                final SQLiteDatabase sqliteADatabase = accDbHelper.getWritableDatabase();
+                final String whereClauseArgument[] = new String[1];
+                if(contact.get_available()!=1){
+                    ContentValues contentValues = new ContentValues();
+                    contentValues.put(AccessoriesDatabase.col5, "-");
+                    contentValues.put(AccessoriesDatabase.col8, "-");
+                    contentValues.put(AccessoriesDatabase.col9, 1);
+                    whereClauseArgument[0] = "" + contact.get_id();
+                    sqliteADatabase.update(AccessoriesDatabase.TABLE_NAME, contentValues, AccessoriesDatabase.col1 + "=?", whereClauseArgument);
+                    Intent intent = new Intent(mContext,GalleryActivity.class);
+                    mContext.startActivity(intent);
+
+                }
+                else
+                    Toast.makeText(mContext,"Item is not a borrowed or lent item",Toast.LENGTH_SHORT).show();
+            }
+        });
         return view;
     }
 
@@ -138,6 +187,86 @@ public class GalleryAdapterA extends BaseAdapter {
         return myQuittingDialogBox;
 
     }
+    private android.app.AlertDialog.Builder askBorrowOption()
+    {   android.app.AlertDialog.Builder adb = new android.app.AlertDialog.Builder(mContext);
+        LayoutInflater adbInflater = LayoutInflater.from(mContext);
+        View eulaLayout = adbInflater.inflate(R.layout.borrowlayout, null);
+        adb.setView(eulaLayout);
+        final EditText name = (EditText) eulaLayout.findViewById(R.id.blname);
+        final EditText date = (EditText) eulaLayout.findViewById(R.id.bldate);
+        AccessoriesDatabase accDbHelper = new AccessoriesDatabase(mContext);
+        final SQLiteDatabase sqliteADatabase = accDbHelper.getWritableDatabase();
+        final String whereClauseArgument[] = new String[1];
+        adb.setTitle("Borrow")
+                .setMessage("Borrowed it from..")
+                .setIcon(R.drawable.borrow)
+                .setPositiveButton("Borrow", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        if(name.getText().toString()!=null || date.getText().toString()!=null){
+                            ContentValues contentValues = new ContentValues();
+                            contentValues.put(AccessoriesDatabase.col5, date.getText().toString());
+                            contentValues.put(AccessoriesDatabase.col8, name.getText().toString());
+                            contentValues.put(AccessoriesDatabase.col9, 3);
+                            whereClauseArgument[0] = "" + contact.get_id();
+                            sqliteADatabase.update(AccessoriesDatabase.TABLE_NAME, contentValues, AccessoriesDatabase.col1 + "=?", whereClauseArgument);
+                            Intent intent = new Intent(mContext,GalleryActivity.class);
+                            mContext.startActivity(intent);
+
+                        }
+                        else {
+                            Toast.makeText(mContext,"Something went wrong.",Toast.LENGTH_SHORT).show();
+                        }
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+        return adb;
+    }
+    private android.app.AlertDialog.Builder askLendOption() {
+        android.app.AlertDialog.Builder adb = new android.app.AlertDialog.Builder(mContext);
+        LayoutInflater adbInflater = LayoutInflater.from(mContext);
+        View eulaLayout = adbInflater.inflate(R.layout.borrowlayout, null);
+        adb.setView(eulaLayout);
+        final EditText name = (EditText) eulaLayout.findViewById(R.id.blname);
+        final EditText date = (EditText) eulaLayout.findViewById(R.id.bldate);
+        AccessoriesDatabase accDbHelper = new AccessoriesDatabase(mContext);
+        final SQLiteDatabase sqliteADatabase = accDbHelper.getWritableDatabase();
+        final String whereClauseArgument[] = new String[1];
+        adb.setTitle("Lend")
+                .setMessage("Lend it to..")
+                .setIcon(R.drawable.borrow)
+                .setPositiveButton("Lend", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        if(name.getText().toString()!=null && date.getText().toString()!=null){
+                            ContentValues contentValues = new ContentValues();
+                            contentValues.put(AccessoriesDatabase.col5, date.getText().toString());
+                            contentValues.put(AccessoriesDatabase.col8, name.getText().toString());
+                            contentValues.put(AccessoriesDatabase.col9, 0);
+                            whereClauseArgument[0] = "" + contact.get_id();
+                            sqliteADatabase.update(AccessoriesDatabase.TABLE_NAME, contentValues, AccessoriesDatabase.col1 + "=?", whereClauseArgument);
+                            Intent intent = new Intent(mContext,GalleryActivity.class);
+                            mContext.startActivity(intent);
+                        }
+                        else {
+                            Toast.makeText(mContext,"Something went wrong.",Toast.LENGTH_SHORT).show();
+                        }
+                        dialog.dismiss();
+                    }
+                })
+                .setNegativeButton("cancel", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                .create();
+        return adb;
+    }
+
     private void openDatabase() {
         Cursor cursor;
         SQLiteDatabase myDb;

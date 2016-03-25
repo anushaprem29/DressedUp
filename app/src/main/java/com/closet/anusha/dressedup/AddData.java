@@ -161,7 +161,6 @@ public class AddData extends AppCompatActivity implements RadioGroup.OnCheckedCh
                     rangeArr=rgc.indexOfChild(findViewById(rgc.getCheckedRadioButtonId()));
                     myDB_c =  new ClothesDatabase(addData);
                     if(doesDatabaseExist(addData,"fclothesdress.db")){
-                        Toast.makeText(AddData.this, "1",Toast.LENGTH_LONG).show();
                         addDataInfo(1,1);
                     }
                     else{

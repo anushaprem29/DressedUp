@@ -68,65 +68,85 @@ public class MainScreen extends AppCompatActivity {
         acc6 = (ImageView) findViewById(R.id.acc6);
         cloth1 = (ImageView) findViewById(R.id.cloth1);
         cloth2 = (ImageView) findViewById(R.id.cloth2);
-        addAcc1(cloth1,"fclothesdress.db","fclothesdtable",7);
-        addAcc1(acc1,"faccessories.db","facc_table",1);
-        addAcc1(acc2,"faccessories.db","facc_table",2);
-        addAcc1(acc3,"faccessories.db","facc_table",3);
-        addAcc1(acc4,"fshoebag.db","fshoebag_table",4);
-        addAcc1(acc5,"faccessories.db","facc_table",5);
-        addAcc1(acc6,"fshoebag.db","fshoebag_table",6);
-        addAcc1(cloth2,"fclothesdress.db","fclothesdtable",8);
-        odb= new OutfitDatabase(this);
-        if(doesDatabaseExist(this,"finoutfitdb.db")){
-            id=1;
-        }
-        else id=0;
+            //Random
+            addAcc1(cloth1, "fclothesdress.db", "fclothesdtable", 7);
+            addAcc1(acc1, "faccessories.db", "facc_table", 1);
+            addAcc1(acc2, "faccessories.db", "facc_table", 2);
+            addAcc1(acc3, "faccessories.db", "facc_table", 3);
+            addAcc1(acc4, "fshoebag.db", "fshoebag_table", 4);
+            addAcc1(acc5, "faccessories.db", "facc_table", 5);
+            addAcc1(acc6, "fshoebag.db", "fshoebag_table", 6);
+            addAcc1(cloth2, "fclothesdress.db", "fclothesdtable", 8);
+        acccTouch(cloth1);
+        acccTouch(acc1);
+        acccTouch(acc2);
+        acccTouch(acc3);
+        acccTouch(acc4);
+        acccTouch(acc5);
+        acccTouch(acc6);
+        acccTouch(cloth2);
+        odb = new OutfitDatabase(this);
+        if (doesDatabaseExist(this, "finoutfitdb.db")) {
+            id = 1;
+        } else id = 0;
         confirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                date = sdf.format(new Date());
-                AlertDialog.Builder adb = new AlertDialog.Builder(MainScreen.this);
-                LayoutInflater adbInflater = LayoutInflater.from(MainScreen.this);
-                View eulaLayout = adbInflater.inflate(R.layout.datecheckbox, null);
-                final CheckBox dontShowAgain = (CheckBox) eulaLayout.findViewById(R.id.skip);
-                adb.setView(eulaLayout);
-                adb.setTitle("Confirm")
-                        .setMessage("Confirm Outfit for today?")
-                        .setIcon(android.R.drawable.btn_star)
-                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                            public void onClick(DialogInterface dialog, int whichButton) {
-                                for(iter=1;iter<=8;iter++) {
-                                    if(cursors[iter]!=null){
-                                        ids[iter-1]=cursors[iter].getInt(0);
-                                        noOfTimes[iter-1]=cursors[iter].getInt(5) + 1;
+                @Override
+                public void onClick(View v) {
+                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+                    date = sdf.format(new Date());
+                    AlertDialog.Builder adb = new AlertDialog.Builder(MainScreen.this);
+                    LayoutInflater adbInflater = LayoutInflater.from(MainScreen.this);
+                    View eulaLayout = adbInflater.inflate(R.layout.datecheckbox, null);
+                    final CheckBox dontShowAgain = (CheckBox) eulaLayout.findViewById(R.id.skip);
+                    adb.setView(eulaLayout);
+                    adb.setTitle("Confirm")
+                            .setMessage("Confirm Outfit for today?")
+                            .setIcon(android.R.drawable.btn_star)
+                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                                public void onClick(DialogInterface dialog, int whichButton) {
+                                    for (iter = 1; iter <= 8; iter++) {
+                                        if (cursors[iter] != null) {
+                                            ids[iter - 1] = cursors[iter].getInt(0);
+                                            noOfTimes[iter - 1] = cursors[iter].getInt(5) + 1;
+                                        } else
+                                            ids[iter - 1] = -1;
                                     }
-                                    else
-                                        ids[iter-1]=-1;
-                                }
-                                if(dontShowAgain.isChecked()){
-                                    showDialog(0);
-                                }
-                                else{
-                                    repeat=null;
-                                    boolean inserted = odb.insertData(id,ids,date,repeat);
-                                    if(inserted){
-                                        updateDbs();
-                                        Toast.makeText(MainScreen.this, "Outfit Confirmed! :) ",Toast.LENGTH_SHORT).show();
-                                    }else{
-                                        Toast.makeText(MainScreen.this, "Something went wrong! :(",Toast.LENGTH_SHORT).show();
+                                    if (dontShowAgain.isChecked()) {
+                                        showDialog(0);
+                                    } else {
+                                        repeat = null;
+                                        boolean inserted = odb.insertData(id, ids, date, repeat);
+                                        if (inserted) {
+                                            updateDbs();
+                                            Toast.makeText(MainScreen.this, "Outfit Confirmed! :) ", Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(MainScreen.this, "Something went wrong! :(", Toast.LENGTH_SHORT).show();
+                                        }
                                     }
                                 }
-                            }
-                        })
-                        .setNegativeButton(android.R.string.no, null).show();
-            }
-        });
+                            })
+                            .setNegativeButton(android.R.string.no, null).show();
+                }
+            });
 
-        addClick();
-        galleryClick();
-        lastWornClick();
+            addClick();
+            galleryClick();
+            lastWornClick();
+        }
+
+
+    private void acccTouch(ImageView acc) {
+        if(acc.getDrawable()==null){
+            acc.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(MainScreen.this,AddData.class);
+                    startActivity(intent);
+                }
+            });
+        }
     }
+
     @Override
     @Deprecated
     protected Dialog onCreateDialog(int id) {
@@ -181,9 +201,6 @@ public class MainScreen extends AppCompatActivity {
             contentValues6.put(AccessoriesDatabase.col5, date.toString());
             contentValues6.put(AccessoriesDatabase.col6, noOfTimes[4]);
             whereClauseArgument[0] = "" + ids[0];
-            System.out.println("whereClauseArguments :" + whereClauseArgument[0]);
-            System.out.println("AccessoriesDatabase :" + contentValues3.getAsString(AccessoriesDatabase.col5));
-            System.out.println("AccessoriesDatabase :" + contentValues3.getAsInteger(AccessoriesDatabase.col6));
             sqliteADatabase.update(AccessoriesDatabase.TABLE_NAME, contentValues3, AccessoriesDatabase.col1 + "=?", whereClauseArgument);
             whereClauseArgument[0] = ""+ids[1];
             System.out.println("whereClauseArguments :" + whereClauseArgument[0]);
@@ -307,12 +324,29 @@ public class MainScreen extends AppCompatActivity {
         if(cursors[i]!=null){
             cursors[i].moveToFirst();
             byteImage1=cursors[i].getBlob(1);
+            if(i==7){
+             if(cursors[i].getInt(9)==2)
+                 cloth2.setVisibility(View.GONE);
+             else
+                 cloth2.setVisibility(View.VISIBLE);
+            }
+            else
+                cloth2.setVisibility(View.VISIBLE);
             imageView.setImageBitmap(BitmapFactory.decodeByteArray(byteImage1, 0,
                     byteImage1.length));
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if(cursors[i].moveToNext()) {
+                        if(i==7){
+                            if(cursors[i].getInt(9)==2)
+                                cloth2.setVisibility(View.GONE);
+                            else
+                                cloth2.setVisibility(View.VISIBLE);
+                        }
+                        else
+                            cloth2.setVisibility(View.VISIBLE);
+
                         byteImage1 = cursors[i].getBlob(1);
                         imageView.setImageBitmap(BitmapFactory.decodeByteArray(byteImage1, 0, byteImage1.length));
                     }

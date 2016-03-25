@@ -24,6 +24,8 @@ public class OutfitAdapter extends BaseAdapter {
     private List<Outfits> outfitRows;
     private LayoutInflater inflater;
     private OutfitDatabase handler;
+    private boolean flag=false;
+
     public OutfitAdapter(Context mContext, List<Outfits> galleryRows, OutfitDatabase handler) {
         inflater = LayoutInflater.from(mContext);
         this.mContext = mContext;
@@ -104,11 +106,15 @@ public class OutfitAdapter extends BaseAdapter {
         cursor = myDb.rawQuery(query1, null);
         if (cursor.moveToFirst()) {
             do {
-                if(cursor.getInt(0)==idPic) break;
+                if(cursor.getInt(0)==idPic){
+                    flag=true;
+                    break;
+                }
                 System.out.println("FGD"+cursor.getInt(0)+idPic);
             } while (cursor.moveToNext());
         }
-        byte returnVal[]= cursor.getBlob(cursor.getColumnIndex("Image_id"));
+        byte returnVal[]=null;
+        if(flag)    returnVal=cursor.getBlob(cursor.getColumnIndex("Image_id"));
         cursor.close();
         return returnVal;
     }
@@ -121,6 +127,7 @@ public class OutfitAdapter extends BaseAdapter {
         private Context mContext;
         private Bitmap[] mImageIds = new Bitmap[8];
         Outfits contact;
+
         //constructor
         public ImageAdapter (Context c,int position, View convertView, ViewGroup parent) {
             mContext = c;
@@ -193,8 +200,9 @@ public class OutfitAdapter extends BaseAdapter {
             ImageView imageView = new ImageView(mContext);
             if(mImageIds[i]!=null)
                 imageView.setImageBitmap(mImageIds[i]);
-            else
+            else{
                 imageView.setImageResource(R.drawable.no_image);
+            }
             imageView.setLayoutParams(new Gallery.LayoutParams(ViewGroup.LayoutParams.FILL_PARENT, ViewGroup.LayoutParams.FILL_PARENT));
             return imageView;
         }

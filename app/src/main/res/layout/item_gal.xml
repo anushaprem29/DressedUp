@@ -48,27 +48,6 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Edit"
-                    android:textSize="10dp"
-                    android:layout_gravity="center_horizontal"
-                    android:textColor="#b6b6b6"/>
-                <ImageView
-                    android:id="@+id/img_edit"
-                    android:scaleType="centerCrop"
-                    android:layout_margin="10dp"
-                    android:layout_width="25dp"
-                    android:layout_gravity="end"
-                    android:background="@drawable/view_bg"
-                    android:src="@drawable/pencil_icon"
-                    android:layout_height="25dp" />
-            </LinearLayout>
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
                     android:text="Borrow"
                     android:textSize="10dp"
                     android:layout_gravity="center_horizontal"
@@ -104,6 +83,28 @@
                     android:src="@drawable/borrow"
                     android:layout_height="25dp" />
             </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Release"
+                    android:textSize="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="#b6b6b6"/>
+                <ImageView
+                    android:id="@+id/img_edit"
+                    android:scaleType="centerCrop"
+                    android:layout_margin="10dp"
+                    android:layout_width="25dp"
+                    android:layout_gravity="end"
+                    android:background="@drawable/view_bg"
+                    android:src="@drawable/up_arrow"
+                    android:layout_height="25dp" />
+            </LinearLayout>
+
         </LinearLayout>
       <TextView
             android:id="@+id/tv_noOfTimes"

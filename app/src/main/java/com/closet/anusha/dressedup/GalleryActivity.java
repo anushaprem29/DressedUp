@@ -32,7 +32,7 @@ public class GalleryActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
-        getSupportActionBar().setTitle("Closet Gallery");
+        getSupportActionBar().setTitle(" Gallery");
         setContentView(R.layout.activity_gallery);
         home = (ImageView) findViewById(R.id.bt_home2);
         gallery = (ImageView) findViewById(R.id.bt_gallery2);
