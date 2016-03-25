@@ -20,6 +20,11 @@ public class LastWorn extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setTitle("Outfits worn on..");
         setContentView(R.layout.activity_last_worn);
         home = (ImageView) findViewById(R.id.bt_home4);
         gallery = (ImageView) findViewById(R.id.bt_gallery4);

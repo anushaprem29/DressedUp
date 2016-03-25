@@ -1,5 +1,4 @@
 package com.closet.anusha.dressedup;
-
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -18,7 +17,6 @@ import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.io.File;
 import java.util.List;
 

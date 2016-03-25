@@ -4,7 +4,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.closet.anusha.dressedup.AddData">
-
     <LinearLayout
         android:layout_alignParentBottom="true"
         android:id="@+id/add_lt"

@@ -12,8 +12,10 @@ import android.graphics.BitmapFactory;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.Toast;
@@ -41,6 +43,10 @@ public class MainScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        getSupportActionBar().setLogo(R.mipmap.ic_launcher);
+        getSupportActionBar().setDisplayUseLogoEnabled(true);
+        getSupportActionBar().setTitle("Home");
         setContentView(R.layout.activity_main_screen);
         ids=new int[8];
         cal = Calendar.getInstance();
@@ -80,8 +86,12 @@ public class MainScreen extends AppCompatActivity {
             public void onClick(View v) {
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 date = sdf.format(new Date());
-                new AlertDialog.Builder(MainScreen.this)
-                        .setTitle("Confirm")
+                AlertDialog.Builder adb = new AlertDialog.Builder(MainScreen.this);
+                LayoutInflater adbInflater = LayoutInflater.from(MainScreen.this);
+                View eulaLayout = adbInflater.inflate(R.layout.datecheckbox, null);
+                final CheckBox dontShowAgain = (CheckBox) eulaLayout.findViewById(R.id.skip);
+                adb.setView(eulaLayout);
+                adb.setTitle("Confirm")
                         .setMessage("Confirm Outfit for today?")
                         .setIcon(android.R.drawable.btn_star)
                         .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
@@ -94,8 +104,19 @@ public class MainScreen extends AppCompatActivity {
                                     else
                                         ids[iter-1]=-1;
                                 }
-                                showDialog(0);
-
+                                if(dontShowAgain.isChecked()){
+                                    showDialog(0);
+                                }
+                                else{
+                                    repeat=null;
+                                    boolean inserted = odb.insertData(id,ids,date,repeat);
+                                    if(inserted){
+                                        updateDbs();
+                                        Toast.makeText(MainScreen.this, "Outfit Confirmed! :) ",Toast.LENGTH_SHORT).show();
+                                    }else{
+                                        Toast.makeText(MainScreen.this, "Something went wrong! :(",Toast.LENGTH_SHORT).show();
+                                    }
+                                }
                             }
                         })
                         .setNegativeButton(android.R.string.no, null).show();

@@ -2,33 +2,108 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/view_bg">
+    android:background="@drawable/view_bg"
+    android:weightSum="1">
     <ImageView
         android:id="@+id/img_pic"
         android:scaleType="centerCrop"
         android:layout_margin="3dp"
         android:layout_width="160dp"
         android:layout_height="240dp" />
-
     <LinearLayout
         android:layout_width="wrap_content"
         android:orientation="vertical"
         android:layout_margin="5dp"
-        android:layout_height="wrap_content">
-
+        android:layout_height="wrap_content"
+        android:layout_weight="1.09">
         <LinearLayout
             android:layout_width="wrap_content"
             android:orientation="horizontal"
             android:layout_height="wrap_content">
-            <ImageView
-                android:id="@+id/img_del"
-                android:scaleType="centerCrop"
-                android:layout_margin="10dp"
-                android:layout_width="25dp"
-                android:layout_gravity="end"
-                android:background="@drawable/view_bg"
-                android:src="@drawable/deletered"
-                android:layout_height="25dp" />
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Delete"
+                    android:textSize="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="#b6b6b6"/>
+                <ImageView
+                    android:id="@+id/img_del"
+                    android:scaleType="centerCrop"
+                    android:layout_margin="10dp"
+                    android:layout_width="25dp"
+                    android:layout_gravity="end"
+                    android:background="@drawable/view_bg"
+                    android:src="@drawable/deletered"
+                    android:layout_height="25dp" />
+                </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Edit"
+                    android:textSize="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="#b6b6b6"/>
+                <ImageView
+                    android:id="@+id/img_edit"
+                    android:scaleType="centerCrop"
+                    android:layout_margin="10dp"
+                    android:layout_width="25dp"
+                    android:layout_gravity="end"
+                    android:background="@drawable/view_bg"
+                    android:src="@drawable/pencil_icon"
+                    android:layout_height="25dp" />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Borrow"
+                    android:textSize="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="#b6b6b6"/>
+                <ImageView
+                    android:id="@+id/img_borrow"
+                    android:scaleType="centerCrop"
+                    android:layout_margin="10dp"
+                    android:layout_width="25dp"
+                    android:layout_gravity="end"
+                    android:background="@drawable/view_bg"
+                    android:src="@drawable/borrow"
+                    android:layout_height="25dp" />
+        </LinearLayout>
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Lend"
+                    android:textSize="10dp"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="#b6b6b6"/>
+                <ImageView
+                    android:id="@+id/img_lend"
+                    android:scaleType="centerCrop"
+                    android:layout_margin="10dp"
+                    android:layout_width="25dp"
+                    android:layout_gravity="end"
+                    android:background="@drawable/view_bg"
+                    android:src="@drawable/borrow"
+                    android:layout_height="25dp" />
+            </LinearLayout>
         </LinearLayout>
       <TextView
             android:id="@+id/tv_noOfTimes"
